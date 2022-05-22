@@ -14,6 +14,9 @@ export async function FetchCall(query, engine) {
     Babbage: "text-babbage-001",
     Ada: "text-ada-001",
   };
+
+  require("dotenv").config();
+
   const res = await fetch(
     "https://api.openai.com/v1/engines/" + engines[engine] + "/completions",
     {
