@@ -15,8 +15,6 @@ export async function FetchCall(query, engine) {
     Ada: "text-ada-001",
   };
 
-  require("dotenv").config();
-
   const res = await fetch(
     "https://api.openai.com/v1/engines/" + engines[engine] + "/completions",
     {
