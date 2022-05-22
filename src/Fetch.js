@@ -1,3 +1,5 @@
+console.log(process.env.REACT_APP_API_KEY);
+
 // Function calls on GPT3 API and returns the output response
 export async function FetchCall(query, engine) {
   const settings = {
