@@ -1,4 +1,5 @@
-console.log(process.env.REACT_APP_API_KEY);
+const API_KEY = process.env.REACT_APP_API_KEY;
+console.log(API_KEY);
 
 // Function calls on GPT3 API and returns the output response
 export async function FetchCall(query, engine) {
@@ -23,7 +24,7 @@ export async function FetchCall(query, engine) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
+        Authorization: `Bearer ${API_KEY}`,
       },
       body: JSON.stringify(settings),
     }
