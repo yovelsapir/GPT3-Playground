@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
 import { FetchCall } from "./Fetch";
 import "./Styles/index.css";
+import Highlight, { defaultProps } from 'prism-react-renderer';
+import theme from "prism-react-renderer/themes/nightOwl";
 
 export default function App() {
   // Initialization of States
   const prevData = window.localStorage.getItem("storedData");
   const [data, setData] = useState(JSON.parse(prevData) || []);
   const [query, setQuery] = useState("");
-  const [engine, setEngine] = useState("Curie");
+  const [engine, setEngine] = useState("Davinci3");
   const [search, setSearch] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -32,7 +34,14 @@ export default function App() {
         setSearch(false);
       }
     };
-    fetchData();
+
+    let timer = setTimeout(() => {
+        fetchData();
+    }, 1000)
+
+    return () => {
+      clearTimeout(timer)
+    }
   }, [search, data, query, engine]);
 
   return (
@@ -54,8 +63,9 @@ export default function App() {
             required
             onClick={(event) => setEngine(event.target.value)}
           >
-            <option value="Curie">Curie</option>
+            <option value="Davinci3">Davinci3</option>
             <option value="Davinci">Davinci</option>
+            <option value="Curie">Curie</option>
             <option value="Babbage">Babbage</option>
             <option value="Ada">Ada</option>
           </select>
@@ -85,11 +95,23 @@ export default function App() {
                 <div className="cardtitle">Prompt:</div>
                 <div className="cardtext">{card.input}</div>
               </div>
-              <div className="row">
+              <div className="row" style={{'flex-direction': 'column'}}>
                 <div className="cardtitle">
                   Response: <br /> with {card.engine}
                 </div>
-                <div className="cardtext">{card.output}</div>
+                <Highlight {...defaultProps} theme={theme} code={card.output} language="jsx">
+                  {({ className, style, tokens, getLineProps, getTokenProps }) => (
+                    <pre className={className} style={{...style, padding: '8px', 'white-space': 'pre-line'}}>
+                      {tokens.map((line, i) => (
+                        <div {...getLineProps({ line, key: i })}>
+                          {line.map((token, key) => (
+                            <span {...getTokenProps({ token, key })} />
+                          ))}
+                        </div>
+                      ))}
+                    </pre>
+                  )}
+                </Highlight>
               </div>
             </div>
           ))}
