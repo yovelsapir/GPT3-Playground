@@ -4,15 +4,16 @@ const API_KEY = process.env.REACT_APP_API_KEY;
 export async function FetchCall(query, engine) {
   const settings = {
     prompt: query,
-    temperature: 0.5,
-    max_tokens: 60,
+    temperature: 0.6,
+    max_tokens: 3950,
     top_p: 1.0,
-    frequency_penalty: 0.0,
-    presence_penalty: 0.0,
+    frequency_penalty: 0.3,
+    presence_penalty: 0.4,
   };
   const engines = {
-    Curie: "text-curie-001",
+    Davinci3: "text-davinci-003",
     Davinci: "text-davinci-002",
+    Curie: "text-curie-001",
     Babbage: "text-babbage-001",
     Ada: "text-ada-001",
   };

@@ -11,7 +11,6 @@ textarea {
   min-height: 200px;
   font-size: 20px;
   padding: 10px;
-  text-transform: capitalize;
 }
 
 select {
@@ -107,6 +106,7 @@ button {
   flex-direction: column;
   font-size: 15px;
   padding: 10px;
+  max-width: 100%;
 }
 
 .loading {
@@ -117,8 +117,8 @@ button {
 .row {
   display: flex;
   margin: 5px;
-  text-transform: capitalize;
   color: white;
+  width: 100%;
 }
 
 .cardtitle {
